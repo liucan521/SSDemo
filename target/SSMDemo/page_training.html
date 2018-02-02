@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/index.css" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="css/easyui.css">
+<link rel="stylesheet" type="text/css" href="css/Iframe.css">
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="js/tendina.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+  <script type="text/javascript">
+      function   formatDate(now)   {
+          var   year=now.getFullYear();
+          var   month=now.getMonth()+1;
+          var   date=now.getDate();
+          var   hour=now.getHours();
+          var   minute=now.getMinutes();
+          var   second=now.getSeconds();
+          if(month < 10){
+            month = '0'+month;
+          }
+          if(date < 10){
+              date = '0'+date;
+          }
+          return   year+"-"+month+"-"+date;
+      }
+  </script>
+  <script type="text/javascript">
+      $.ajax({
+          type:'POST',
+          url:'http://localhost:8080/ssm/training/selectByPrimaryKey.do',
+          data:{"studentid":12370},
+          dataType:'json',
+          async:'true',
+          success:function(data){
+              //alert(data.birthdate);
+              if(data!=null){
+                  $("input[name='name']").val(data.name);
+                  $("input[name='idcard']").val(data.idcard);
+                  $("input[name='ethnic']").val(data.ethnic);
+                  $("input[name='bloodtype']").val(data.bloodtype);
+                  $("input[name='height']").val(data.height);
+                  $("input[name='weight']").val(data.weight);
+                  $("input[name='domicile']").val(data.domicile);
+                  if(data.gender=="0"){
+                      $("input[name='gender']").get(0).checked=true;
+                  }else{
+                      $("input[name='gender']").get(1).checked=true;
+                  }
+                  $("input[name='telephone']").val(data.telephone);
+                  $("input[name='address']").val(data.address);
+                  $("input[name='political']").val(data.political);
+                  $("input[name='education']").val(data.education);
+                  var   d=new   Date(data.birthdate)
+                  $("input[name='birthday']").val(formatDate(d));
+                  $("input[name='age']").val(data.age);
+
+                  $("#table-info tr td input").attr("readOnly",true);
+                  //$("input[name='name']").attr("readOnly",true);
+                  //$("input[name='idcard']").attr("readOnly",true);
+
+                  $("#btn_save").text("编辑");
+                  $("#btn_save").attr("onclick","isUpdate()");
+              }else{
+                  alert("未录入信息");
+                  $("#btn_save").text("提交");
+                  $("#btn_save").attr("onclick","insertTraining()");
+              }
+                  //$("#btn_save").attr("onclick","updateTraining()");
+          },
+          error:function(data){
+              alert("未录入基本信息");
+          }
+      });
+
+  </script>
+  <script type="text/javascript">
+    function updateTraining() {
+        var name = $("input[name='name']").val();
+        var ethnic = $("input[name='ethnic']").val();
+        var idcard = $("input[name='idcard']").val();
+        var bloodtype = $("input[name='bloodtype']").val();
+        var telephone = $("input[name='telephone']").val();
+        var height = $("input[name='height']").val();
+        var weight = $("input[name='weight']").val();
+        var domicile = $("input[name='domicile']").val();
+        var gender = $("input[name='gender']:checked").val();
+        var address = $("input[name='address']").val();
+        var political = $("input[name='political']").val();
+        var education = $("input[name='education']").val();
+        var birthday = $("input[name='birthday']").val();
+        var age = $("input[name='age']").val();
+        var value = {"name":name,"ethnic":ethnic,"idcard":idcard,"telephone":telephone,"bloodtype":bloodtype,"height":height,"weight":weight,"domicile":domicile,"gender":gender,"address":address,"political":political,"education":education,"birthday":birthday ,"age":age};
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/ssm/training/updateTrainig.do',
+            data: value,
+            dataType: 'json',
+            async: 'true',
+            success: function (data) {
+                alert(data);
+                if (data == 1) {
+                    $("#btn_save").text("编辑");
+                    $("#btn_save").attr("onclick","isUpdate()");
+                    $("#table-info tr td input").attr("readOnly",true);
+                    alert("修改成功");
+                } else {
+                    alert("修改失败");
+                }
+            }
+        });
+    }
+  </script>
+  <script type="text/javascript">
+    function isUpdate() {
+        $("#table-info tr td input").removeAttr("readonly");
+        $("#btn_save").text("保存");
+        $("#btn_save").attr("onclick","updateTraining()");
+
+    }
+  </script>
+<title>无标题文档</title>
+<script type="text/javascript">
+  function insertTraining(){
+    var name = $("input[name='name']").val();
+    var ethnic = $("input[name='ethnic']").val();
+    var idcard = $("input[name='idcard']").val();
+    var bloodtype = $("input[name='bloodtype']").val();
+    var telephone = $("input[name='telephone']").val();
+    var height = $("input[name='height']").val();
+    var weight = $("input[name='weight']").val();
+    var domicile = $("input[name='domicile']").val();
+    var gender = $("input[name='gender']:checked").val();
+    var address = $("input[name='address']").val();
+    var political = $("input[name='political']").val();
+    var education = $("input[name='education']").val();
+    var birthday = $("input[name='birthday']").val();
+    var age = $("input[name='age']").val();
+      var value = {"name":name,"ethnic":ethnic,"idcard":idcard,"telephone":telephone,"bloodtype":bloodtype,"height":height,"weight":weight,"domicile":domicile,"gender":gender,"address":address,"political":political,"education":education,"birthday":birthday ,"age":age};
+    $.ajax({
+      type:'POST',
+      url:'http://localhost:8080/ssm/training/insertTrainig.do',
+      data:value,
+      dataType:'json',
+      async:'true',
+        success:function(data){
+          alert(data);
+          if(data==1){
+
+              alert("录入成功");
+          }else{
+              alert("录入失败");
+          }
+
+      }
+
+    });
+  }
+</script>
+
+</head>
+
+<body>
+      <div style=" height:100%; width:100%;">
+        <div class="easyui-tabs" style="width:100%;height:100%; ">
+          <div title="个人概况">
+            <div class="inside">
+              <table id="table-info" class="table-info" cellspacing="10%">
+                <tr>
+                  <td><span>姓名：</span>
+                    <input class="input-text" type="text" name="name"/></td>
+                  <td><span>民族：</span>
+                    <input class="input-text" type="text" name="ethnic"/></td>
+                  <td><input class="input-radio" type="radio" name="gender" value="0"/>
+                    <span style=" float:none;margin-right:10%">男</span>
+                    <input class="input-radio" type="radio" name="gender" value="1"/>
+                    <span style=" float:none;margin-right:10%">女</span></td>
+                  <td rowspan="5">
+                  <div id="addCommodityIndex"> 
+                      
+    
+                      <div class="input-group row">
+                       
+                        <div class="col-sm-9 big-photo">
+                          <div id="preview"> <img id="imghead" border="0" src="pic/photo_icon.png" width="200px" height="200px" onclick="$('#previewImg').click();"> </div>
+                          <input type="file" onchange="previewImage(this)" style="display: none;" id="previewImg">
+
+                        </div>
+                      </div>
+   
+                      
+                    </div></td>
+                </tr>
+                <tr>
+                  <td><span>身份证号：</span>
+                    <input class="input-text" type="text" name="idcard"/></td>
+                  <td><span>出生年月:</span>
+                    <input class="input-text" type="text" name="birthday"/></td>
+                  <td><span class="span-age">年龄:</span>
+                    <input class="input-age" type="text" name="age"/></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><span>血型：</span>
+                    <input class="input-text" type="text" name="bloodtype"/></td>
+                  <td><span>政治面貌:</span>
+                    <input class="input-text" type="text" name="political"/></td>
+                  <td><span class="span-age">身高:</span>
+                    <input class="input-age" type="text" name="height"/></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><span>学历：</span>
+                    <input class="input-text" type="text" name="education"/></td>
+                  <td><span>联系电话:</span>
+                    <input class="input-text" type="text" name="telephone"/></td>
+                  <td><span class="span-age">体重:</span>
+                    <input class="input-age" type="text" name="weight"/></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><span>户籍地：</span>
+                    <input class="input-text" type="text" name="domicile"/></td>
+                  <td colspan="2"><span style="width:10%">常住地址:</span>
+                    <input style="width:59%" class="input-text" type="text" name="address"/></td>
+                  
+                  
+                </tr>
+              </table>
+              <div style="text-align:center; width:100%; height:13%"><button id="btn_save" style="width:10%;height:100%" value="保存" onClick="insertTraining()">保存</button></div>
+
+            </div>
+
+          </div>
+          <div title="单位信息">
+            <ul data-options="url:'tree_data1.json',method:'get',animate:true">
+            </ul>
+          </div>
+          <div title="工作经历" data-options="url:'tree_data1.json',method:'get',animate:true"> This is the help content. </div>
+        </div>
+      </div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>湖南省人武学校</title>
+<link rel="stylesheet" href="css/index.css" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="css/easyui.css">
+<link rel="stylesheet" type="text/css" href="css/Iframe.css">
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="js/tendina.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+
+
+<script>
+  function login(){
+    $('#login').window('open');
+  }
+  function logon(){
+    alert("登陆成功");
+    $('#login').window('close');
+  }
+</script>
+
+</head>
+<body>
+<!--顶部-->
+<div class="top">
+  <div style="float: left;width:50%;"><span style="font-size: 16px;line-height: 45px;padding-left: 10%;color: #fff">湖南省人武学校|专干集训信息化平台</span></div>
+  <div id="ad_setting" class="ad_setting"> <a class="ad_setting_a" href="javascript:; " onclick="login()">登录</a> </div>
+</div>
+<!--顶部结束--> 
+<!--菜单-->
+<div class="left-menu">
+  <ul id="menu">
+    <li class="menu-list"> <a style="cursor:pointer" class="firsta"><i  class="glyph-icon xlcd"></i>学员管理<s class="sz"></s></a>
+      <ul>
+        <li><a href="page_training.html" target="menuFrame"><i class="glyph-icon icon-chevron-right2"></i>基本信息录入与修改</a></li>
+        <li><a href="#"><i class="glyph-icon icon-chevron-right2"></i>集训/轮训报名</a></li>
+        <li><a href="#"><i class="glyph-icon icon-chevron-right2"></i>物料领用记录</a></li>
+        <li><a href="page_score.html" target="menuFrame"><i class="glyph-icon icon-chevron-right2"></i>成绩查询</a></li>
+        <li><a href="#"><i class="glyph-icon icon-chevron-right2"></i>餐饮服务相关记录</a></li>
+        <li><a href="#"><i class="glyph-icon icon-chevron-right2"></i>基本信息的统计分析</a></li>
+
+        <li><a href="#" target="menuFrame"><i class="glyph-icon icon-chevron-right2"></i>事务处理测试</a></li>
+      </ul>
+    </li>
+    <li class="menu-list"> <a style="cursor:pointer" class="firsta"><i  class="glyph-icon xlcd"></i>教员管理<s class="sz"></s></a>
+      <ul>
+        <li><a href="#"><i class="glyph-icon icon-chevron-right1"></i>基本信息录入与修改</a></li>
+        <li><a href="#"><i class="glyph-icon icon-chevron-right2"></i>教学成果展示</a></li>
+        <li><a href="#"><i class="glyph-icon icon-chevron-right2"></i>物料领用记录</a></li>
+        <li><a href="#"><i class="glyph-icon icon-chevron-right2"></i>餐饮服务相关记录</a></li>
+        <li><a href="#"><i class="glyph-icon icon-chevron-right2"></i>基本信息的统计分析</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<!--菜单右边的iframe页面-->
+<div id="right-content" class="right-content">
+  <div class="content">
+    <div id="page_content">
+
+      <iframe id="menuFrame" name="menuFrame" src="logo.html" style="overflow:visible;"
+                        scrolling="no" frameborder="no" width="100%" height="100%"></iframe>
+    </div>
+  </div>
+</div>
+<div id="login" class="easyui-window" title="登录" style="width:350px;height:0px;padding:10px;" data-options="
+            iconCls:'icon-save',
+            closed:true,
+            onResize:function(){
+                $(this).window('hcenter');
+            }">
+  <div style="padding:30px 40px 20px 40px;height:180px;">
+    <form id="ff" method="post">
+      <table style="height:90%;">
+        <tr style="height:34px;line-height:34px;overflow:hidden;">
+          <td>用户名:</td>
+          <td><input class="easyui-textbox" type="text" id="id" name="id" style="width:160px;height:24px;">
+            </input></td>
+        </tr>
+        <tr style="height:34px;line-height:34px;overflow:hidden;">
+          <td style="height:18px;">密码:</td>
+          <td style="height:18px;"><input class="easyui-textbox" type="password" id="psw" name="psw" style="width:160px;height:24px;">
+            </input></td>
+        </tr>
+        <tr style="height:34px;line-height:34px;overflow:hidden;">
+          <td style="height:18px;">确认密码:</td>
+          <td style="height:18px;"><input class="easyui-textbox" type="password" id="psw2" name="psw2" style="width:160px;height:24px;">
+            </input></td>
+        </tr>
+      </table>
+    </form>
+    <br/>
+    <div style="text-align:center;padding:5px"> <a href="javascript:void(0)" class="easyui-linkbutton" onclick="logon()" style="width:60px;">登录</a> </div>
+  </div>
+</div>
+</body>
+</html>

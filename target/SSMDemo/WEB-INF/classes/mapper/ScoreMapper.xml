@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssmDemo.dao.ScoreDto">
+
+    <!-- 1、 获取某学生以及该学生所在班级的信息 -->
+    <!-- 可以显示指出c.class_id,c.class_name,s.s_id,s.s_name列明，
+        如果用"*"代替，则mybatis会自动匹配resultMap中提供的列名 -->
+    <!-- 一对一关联 方式二 begin -->
+    <!-- 一对一关联 方式一 begin -->
+    <select id="getScores" resultType="com.ssmDemo.model.ScoreModel">
+        select * from
+            (select a.studentid,b.coursename,a.score from tscore a left join tcourse b on a.courseid = b.courseid) c
+        where c.studentid=#{id};
+    </select>
+</mapper>

@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/index.css" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="css/easyui.css">
+<link rel="stylesheet" type="text/css" href="css/Iframe.css">
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="js/tendina.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+  <script type="text/javascript">
+      function   formatDate(now)   {
+          var   year=now.getFullYear();
+          var   month=now.getMonth()+1;
+          var   date=now.getDate();
+          var   hour=now.getHours();
+          var   minute=now.getMinutes();
+          var   second=now.getSeconds();
+          if(month < 10){
+            month = '0'+month;
+          }
+          if(date < 10){
+              date = '0'+date;
+          }
+          return   year+"-"+month+"-"+date;
+      }
+  </script>
+  <script type="text/javascript">
+     
+
+  </script>
+  
+
+<title>无标题文档</title>
+
+
+</head>
+
+<body>
+
+      <div style=" height:100%; width:100%;">
+          <div id="p" class="easyui-panel" title="成绩表" style="width:70%;height:50%;padding:1%;margin: auto;">
+          <table id="dg" style="width:80%;margin:auto;text-align: center;">
+            <thead>
+                <tr bgcolor="#a9a9a9">
+                    <th style="border: #a9a9a9 1px solid">科目</th>
+                    <th style="border: #a9a9a9 1px solid">成绩</th>
+                </tr>
+            </thead>
+              <tbody>
+
+              </tbody>
+  </table>
+          </div>
+          <script type="text/javascript">
+              var tbody = '';
+              $.ajax({
+                  type:'POST',
+                  url:'http://localhost:8080/ssm/score/getScores.do',
+                  data:{"studentid":12370},
+                  dataType:'json',
+                  async:true,
+                  success:function (data) {
+                      var json = eval(data);
+                      $.each(json,function (index,item) {
+                          var  tr = "<tr>";
+                          tr+='<td style="border: #a9a9a9 1px solid">'+ json[index].coursename+'</td>';
+                          tr+='<td style="border: #a9a9a9 1px solid">'+ json[index].score+'</td>';
+                          tr+="</tr>";
+                          tbody+=tr;
+                      });
+                      $("#dg").children('tbody').append(tbody);
+                  }
+              });
+          </script>
+      </div>
+</body>
+</html>

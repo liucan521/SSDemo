@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssmDemo.dao.TtrainingMapper" >
+  <resultMap id="BaseResultMap" type="com.ssmDemo.model.Ttraining" >
+    <id column="studentid" property="studentid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="ethnic" property="ethnic" jdbcType="VARCHAR" />
+    <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+    <result column="birthdate" property="birthdate" jdbcType="DATE" />
+    <result column="gender" property="gender" jdbcType="CHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="bloodtype" property="bloodtype" jdbcType="CHAR" />
+    <result column="height" property="height" jdbcType="TINYINT" />
+    <result column="weight" property="weight" jdbcType="TINYINT" />
+    <result column="clothestype" property="clothestype" jdbcType="TINYINT" />
+    <result column="political" property="political" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="domicile" property="domicile" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="workingtime" property="workingtime" jdbcType="DATE" />
+    <result column="companyaddr" property="companyaddr" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="isarmy" property="isarmy" jdbcType="BIT" />
+    <result column="enterdate" property="enterdate" jdbcType="DATE" />
+    <result column="enddate" property="enddate" jdbcType="DATE" />
+    <result column="arms" property="arms" jdbcType="VARCHAR" />
+    <result column="profession" property="profession" jdbcType="VARCHAR" />
+    <result column="forcename" property="forcename" jdbcType="VARCHAR" />
+    <result column="post" property="post" jdbcType="VARCHAR" />
+    <result column="equipment" property="equipment" jdbcType="VARCHAR" />
+    <result column="classid" property="classid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ssmDemo.model.Ttraining" extends="BaseResultMap" >
+    <result column="pic" property="pic" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    studentid, name, ethnic, idcard, birthdate, gender, age, bloodtype, height, weight, 
+    clothestype, political, education, domicile, company, workingtime, companyaddr, address, 
+    telephone, isarmy, enterdate, enddate, arms, profession, forcename, post, equipment, 
+    classid, username
+  </sql>
+  <sql id="Blob_Column_List" >
+    pic
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.ssmDemo.model.TtrainingExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ttraining
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ssmDemo.model.TtrainingExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ttraining
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ttraining
+    where studentid = #{studentid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ttraining
+    where studentid = #{studentid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ssmDemo.model.TtrainingExample" >
+    delete from ttraining
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ssmDemo.model.Ttraining" >
+    insert into ttraining (studentid, name, ethnic, 
+      idcard, birthdate, gender, 
+      age, bloodtype, height, 
+      weight, clothestype, political, 
+      education, domicile, company, 
+      workingtime, companyaddr, address, 
+      telephone, isarmy, enterdate, 
+      enddate, arms, profession, 
+      forcename, post, equipment, 
+      classid, username, pic
+      )
+    values (#{studentid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{ethnic,jdbcType=VARCHAR}, 
+      #{idcard,jdbcType=VARCHAR}, #{birthdate,jdbcType=DATE}, #{gender,jdbcType=CHAR}, 
+      #{age,jdbcType=INTEGER}, #{bloodtype,jdbcType=CHAR}, #{height,jdbcType=TINYINT}, 
+      #{weight,jdbcType=TINYINT}, #{clothestype,jdbcType=TINYINT}, #{political,jdbcType=VARCHAR}, 
+      #{education,jdbcType=VARCHAR}, #{domicile,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+      #{workingtime,jdbcType=DATE}, #{companyaddr,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{isarmy,jdbcType=BIT}, #{enterdate,jdbcType=DATE}, 
+      #{enddate,jdbcType=DATE}, #{arms,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, 
+      #{forcename,jdbcType=VARCHAR}, #{post,jdbcType=VARCHAR}, #{equipment,jdbcType=VARCHAR}, 
+      #{classid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{pic,jdbcType=LONGVARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssmDemo.model.Ttraining" >
+    insert into ttraining
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="studentid != null" >
+        studentid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="ethnic != null" >
+        ethnic,
+      </if>
+      <if test="idcard != null" >
+        idcard,
+      </if>
+      <if test="birthdate != null" >
+        birthdate,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="bloodtype != null" >
+        bloodtype,
+      </if>
+      <if test="height != null" >
+        height,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="clothestype != null" >
+        clothestype,
+      </if>
+      <if test="political != null" >
+        political,
+      </if>
+      <if test="education != null" >
+        education,
+      </if>
+      <if test="domicile != null" >
+        domicile,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="workingtime != null" >
+        workingtime,
+      </if>
+      <if test="companyaddr != null" >
+        companyaddr,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="isarmy != null" >
+        isarmy,
+      </if>
+      <if test="enterdate != null" >
+        enterdate,
+      </if>
+      <if test="enddate != null" >
+        enddate,
+      </if>
+      <if test="arms != null" >
+        arms,
+      </if>
+      <if test="profession != null" >
+        profession,
+      </if>
+      <if test="forcename != null" >
+        forcename,
+      </if>
+      <if test="post != null" >
+        post,
+      </if>
+      <if test="equipment != null" >
+        equipment,
+      </if>
+      <if test="classid != null" >
+        classid,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="pic != null" >
+        pic,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studentid != null" >
+        #{studentid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ethnic != null" >
+        #{ethnic,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="birthdate != null" >
+        #{birthdate,jdbcType=DATE},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=CHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="bloodtype != null" >
+        #{bloodtype,jdbcType=CHAR},
+      </if>
+      <if test="height != null" >
+        #{height,jdbcType=TINYINT},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=TINYINT},
+      </if>
+      <if test="clothestype != null" >
+        #{clothestype,jdbcType=TINYINT},
+      </if>
+      <if test="political != null" >
+        #{political,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="domicile != null" >
+        #{domicile,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="workingtime != null" >
+        #{workingtime,jdbcType=DATE},
+      </if>
+      <if test="companyaddr != null" >
+        #{companyaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="isarmy != null" >
+        #{isarmy,jdbcType=BIT},
+      </if>
+      <if test="enterdate != null" >
+        #{enterdate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=DATE},
+      </if>
+      <if test="arms != null" >
+        #{arms,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="forcename != null" >
+        #{forcename,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null" >
+        #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="equipment != null" >
+        #{equipment,jdbcType=VARCHAR},
+      </if>
+      <if test="classid != null" >
+        #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        #{pic,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ssmDemo.model.TtrainingExample" resultType="java.lang.Integer" >
+    select count(*) from ttraining
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ttraining
+    <set >
+      <if test="record.studentid != null" >
+        studentid = #{record.studentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ethnic != null" >
+        ethnic = #{record.ethnic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcard != null" >
+        idcard = #{record.idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthdate != null" >
+        birthdate = #{record.birthdate,jdbcType=DATE},
+      </if>
+      <if test="record.gender != null" >
+        gender = #{record.gender,jdbcType=CHAR},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.bloodtype != null" >
+        bloodtype = #{record.bloodtype,jdbcType=CHAR},
+      </if>
+      <if test="record.height != null" >
+        height = #{record.height,jdbcType=TINYINT},
+      </if>
+      <if test="record.weight != null" >
+        weight = #{record.weight,jdbcType=TINYINT},
+      </if>
+      <if test="record.clothestype != null" >
+        clothestype = #{record.clothestype,jdbcType=TINYINT},
+      </if>
+      <if test="record.political != null" >
+        political = #{record.political,jdbcType=VARCHAR},
+      </if>
+      <if test="record.education != null" >
+        education = #{record.education,jdbcType=VARCHAR},
+      </if>
+      <if test="record.domicile != null" >
+        domicile = #{record.domicile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.company != null" >
+        company = #{record.company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workingtime != null" >
+        workingtime = #{record.workingtime,jdbcType=DATE},
+      </if>
+      <if test="record.companyaddr != null" >
+        companyaddr = #{record.companyaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null" >
+        telephone = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isarmy != null" >
+        isarmy = #{record.isarmy,jdbcType=BIT},
+      </if>
+      <if test="record.enterdate != null" >
+        enterdate = #{record.enterdate,jdbcType=DATE},
+      </if>
+      <if test="record.enddate != null" >
+        enddate = #{record.enddate,jdbcType=DATE},
+      </if>
+      <if test="record.arms != null" >
+        arms = #{record.arms,jdbcType=VARCHAR},
+      </if>
+      <if test="record.profession != null" >
+        profession = #{record.profession,jdbcType=VARCHAR},
+      </if>
+      <if test="record.forcename != null" >
+        forcename = #{record.forcename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.post != null" >
+        post = #{record.post,jdbcType=VARCHAR},
+      </if>
+      <if test="record.equipment != null" >
+        equipment = #{record.equipment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classid != null" >
+        classid = #{record.classid,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pic != null" >
+        pic = #{record.pic,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update ttraining
+    set studentid = #{record.studentid,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      ethnic = #{record.ethnic,jdbcType=VARCHAR},
+      idcard = #{record.idcard,jdbcType=VARCHAR},
+      birthdate = #{record.birthdate,jdbcType=DATE},
+      gender = #{record.gender,jdbcType=CHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      bloodtype = #{record.bloodtype,jdbcType=CHAR},
+      height = #{record.height,jdbcType=TINYINT},
+      weight = #{record.weight,jdbcType=TINYINT},
+      clothestype = #{record.clothestype,jdbcType=TINYINT},
+      political = #{record.political,jdbcType=VARCHAR},
+      education = #{record.education,jdbcType=VARCHAR},
+      domicile = #{record.domicile,jdbcType=VARCHAR},
+      company = #{record.company,jdbcType=VARCHAR},
+      workingtime = #{record.workingtime,jdbcType=DATE},
+      companyaddr = #{record.companyaddr,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      isarmy = #{record.isarmy,jdbcType=BIT},
+      enterdate = #{record.enterdate,jdbcType=DATE},
+      enddate = #{record.enddate,jdbcType=DATE},
+      arms = #{record.arms,jdbcType=VARCHAR},
+      profession = #{record.profession,jdbcType=VARCHAR},
+      forcename = #{record.forcename,jdbcType=VARCHAR},
+      post = #{record.post,jdbcType=VARCHAR},
+      equipment = #{record.equipment,jdbcType=VARCHAR},
+      classid = #{record.classid,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      pic = #{record.pic,jdbcType=LONGVARBINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ttraining
+    set studentid = #{record.studentid,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      ethnic = #{record.ethnic,jdbcType=VARCHAR},
+      idcard = #{record.idcard,jdbcType=VARCHAR},
+      birthdate = #{record.birthdate,jdbcType=DATE},
+      gender = #{record.gender,jdbcType=CHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      bloodtype = #{record.bloodtype,jdbcType=CHAR},
+      height = #{record.height,jdbcType=TINYINT},
+      weight = #{record.weight,jdbcType=TINYINT},
+      clothestype = #{record.clothestype,jdbcType=TINYINT},
+      political = #{record.political,jdbcType=VARCHAR},
+      education = #{record.education,jdbcType=VARCHAR},
+      domicile = #{record.domicile,jdbcType=VARCHAR},
+      company = #{record.company,jdbcType=VARCHAR},
+      workingtime = #{record.workingtime,jdbcType=DATE},
+      companyaddr = #{record.companyaddr,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      isarmy = #{record.isarmy,jdbcType=BIT},
+      enterdate = #{record.enterdate,jdbcType=DATE},
+      enddate = #{record.enddate,jdbcType=DATE},
+      arms = #{record.arms,jdbcType=VARCHAR},
+      profession = #{record.profession,jdbcType=VARCHAR},
+      forcename = #{record.forcename,jdbcType=VARCHAR},
+      post = #{record.post,jdbcType=VARCHAR},
+      equipment = #{record.equipment,jdbcType=VARCHAR},
+      classid = #{record.classid,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssmDemo.model.Ttraining" >
+    update ttraining
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ethnic != null" >
+        ethnic = #{ethnic,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="birthdate != null" >
+        birthdate = #{birthdate,jdbcType=DATE},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="bloodtype != null" >
+        bloodtype = #{bloodtype,jdbcType=CHAR},
+      </if>
+      <if test="height != null" >
+        height = #{height,jdbcType=TINYINT},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=TINYINT},
+      </if>
+      <if test="clothestype != null" >
+        clothestype = #{clothestype,jdbcType=TINYINT},
+      </if>
+      <if test="political != null" >
+        political = #{political,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="domicile != null" >
+        domicile = #{domicile,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="workingtime != null" >
+        workingtime = #{workingtime,jdbcType=DATE},
+      </if>
+      <if test="companyaddr != null" >
+        companyaddr = #{companyaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="isarmy != null" >
+        isarmy = #{isarmy,jdbcType=BIT},
+      </if>
+      <if test="enterdate != null" >
+        enterdate = #{enterdate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null" >
+        enddate = #{enddate,jdbcType=DATE},
+      </if>
+      <if test="arms != null" >
+        arms = #{arms,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        profession = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="forcename != null" >
+        forcename = #{forcename,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null" >
+        post = #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="equipment != null" >
+        equipment = #{equipment,jdbcType=VARCHAR},
+      </if>
+      <if test="classid != null" >
+        classid = #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        pic = #{pic,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where studentid = #{studentid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ssmDemo.model.Ttraining" >
+    update ttraining
+    set name = #{name,jdbcType=VARCHAR},
+      ethnic = #{ethnic,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      birthdate = #{birthdate,jdbcType=DATE},
+      gender = #{gender,jdbcType=CHAR},
+      age = #{age,jdbcType=INTEGER},
+      bloodtype = #{bloodtype,jdbcType=CHAR},
+      height = #{height,jdbcType=TINYINT},
+      weight = #{weight,jdbcType=TINYINT},
+      clothestype = #{clothestype,jdbcType=TINYINT},
+      political = #{political,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      domicile = #{domicile,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      workingtime = #{workingtime,jdbcType=DATE},
+      companyaddr = #{companyaddr,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      isarmy = #{isarmy,jdbcType=BIT},
+      enterdate = #{enterdate,jdbcType=DATE},
+      enddate = #{enddate,jdbcType=DATE},
+      arms = #{arms,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      forcename = #{forcename,jdbcType=VARCHAR},
+      post = #{post,jdbcType=VARCHAR},
+      equipment = #{equipment,jdbcType=VARCHAR},
+      classid = #{classid,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      pic = #{pic,jdbcType=LONGVARBINARY}
+    where studentid = #{studentid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssmDemo.model.Ttraining" >
+    update ttraining
+    set name = #{name,jdbcType=VARCHAR},
+      ethnic = #{ethnic,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      birthdate = #{birthdate,jdbcType=DATE},
+      gender = #{gender,jdbcType=CHAR},
+      age = #{age,jdbcType=INTEGER},
+      bloodtype = #{bloodtype,jdbcType=CHAR},
+      height = #{height,jdbcType=TINYINT},
+      weight = #{weight,jdbcType=TINYINT},
+      clothestype = #{clothestype,jdbcType=TINYINT},
+      political = #{political,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      domicile = #{domicile,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      workingtime = #{workingtime,jdbcType=DATE},
+      companyaddr = #{companyaddr,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      isarmy = #{isarmy,jdbcType=BIT},
+      enterdate = #{enterdate,jdbcType=DATE},
+      enddate = #{enddate,jdbcType=DATE},
+      arms = #{arms,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      forcename = #{forcename,jdbcType=VARCHAR},
+      post = #{post,jdbcType=VARCHAR},
+      equipment = #{equipment,jdbcType=VARCHAR},
+      classid = #{classid,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR}
+    where studentid = #{studentid,jdbcType=INTEGER}
+  </update>
+</mapper>
